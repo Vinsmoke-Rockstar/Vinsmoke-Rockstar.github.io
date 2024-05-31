@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>4. 函数式编程 | 路西の博客</title><meta name="author" content="路西"><meta name="copyright" content="路西"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="函数式编程 函数式编程是一种抽象程度很高的编程范式 高阶函数 abs(-10)是函数调用，而abs是函数本身。 函数本身也可以赋值给变量，即变量可以指向函数 123&gt;&gt;&gt; f &#x3D; abs&gt;&gt;&gt; f(-10)10 函数名，指向函数的变量 对于abs()，可以把函数名abs看作变量，它指向一个可以计算绝对值的函数 高阶函数：一个函数接收另一个函数作为参数，这种函数就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. 函数式编程">
+<meta property="og:url" content="http://example.com/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="路西の博客">
+<meta property="og:description" content="函数式编程 函数式编程是一种抽象程度很高的编程范式 高阶函数 abs(-10)是函数调用，而abs是函数本身。 函数本身也可以赋值给变量，即变量可以指向函数 123&gt;&gt;&gt; f &#x3D; abs&gt;&gt;&gt; f(-10)10 函数名，指向函数的变量 对于abs()，可以把函数名abs看作变量，它指向一个可以计算绝对值的函数 高阶函数：一个函数接收另一个函数作为参数，这种函数就">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/%E9%BA%A6%E7%94%B0%E4%B8%8E%E6%9F%8F%E6%A0%91.jpg">
+<meta property="article:published_time" content="2023-02-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-31T08:28:30.506Z">
+<meta property="article:author" content="路西">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/%E9%BA%A6%E7%94%B0%E4%B8%8E%E6%9F%8F%E6%A0%91.jpg"><link rel="shortcut icon" href="/image/%E8%8D%89%E5%B8%BD.png"><link rel="canonical" href="http://example.com/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '4. 函数式编程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-31 16:28:30'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/image/puppy.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/road.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="路西の博客"><span class="site-name">路西の博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">4. 函数式编程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-31T08:28:30.506Z" title="更新于 2024-05-31 16:28:30">2024-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="函数式编程">函数式编程</h1>
+<p>函数式编程是一种抽象程度很高的编程范式</p>
+<h2 id="高阶函数">高阶函数</h2>
+<p><code>abs(-10)</code>是函数调用，而<code>abs</code>是函数本身。<br>
+函数本身也可以赋值给变量，即变量可以指向函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = abs</span><br><span class="line">&gt;&gt;&gt; f(-10)</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<p>函数名，指向函数的变量<br>
+对于<code>abs()</code>，可以把函数名abs看作变量，它指向一个可以计算绝对值的函数</p>
+<p><em>高阶函数</em>：一个函数接收另一个函数作为参数，这种函数就称之为高阶函数。</p>
+<p>定义一个最简单的高阶函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def add(x,y,f):</span><br><span class="line">	return f(x)+f(y)</span><br></pre></td></tr></table></figure>
+<p>调用<code>add(-5,6,abs)</code>时，参数x,y和f分别接收<code>-5</code>,<code>6</code>和<code>abs</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = -5</span><br><span class="line">y = 6</span><br><span class="line">f = abs</span><br><span class="line">f(x) + f(y) ==&gt; abs(-5) + abs(6) ==&gt; 11</span><br><span class="line">return 11</span><br></pre></td></tr></table></figure>
+<h3 id="map-reduce">map/reduce</h3>
+<p>map函数接收两个参数，一个是函数，一个是Iterable,<br>
+<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def f(x):</span><br><span class="line">...     return x * x</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])</span><br><span class="line">&gt;&gt;&gt; list(r)</span><br><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81]</span><br></pre></td></tr></table></figure>
+<p>将list中的所有数字转为字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9]))</span><br><span class="line">[&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;]</span><br></pre></td></tr></table></figure>
+<h3 id="reduce">reduce</h3>
+<p>reduce把一个函数作用在一个序列<code>[x1，x2,x3,...]</code>上，这个函数必须接收两个参数<br>
+reduce把结果继续和序列的下一个元素做累积计算，效果就是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)</span><br></pre></td></tr></table></figure>
+<p>比方说，对一个序列求和，可以用reduce实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def add(x, y):</span><br><span class="line">...     return x + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])</span><br><span class="line">25</span><br></pre></td></tr></table></figure>
+<p>考虑到字符串sr也是一个序列，我们可以把str转换为int函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from functools import reduce</span><br><span class="line">&gt;&gt;&gt; def fn(x, y):</span><br><span class="line">...     return x * 10 + y</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; def char2num(s):</span><br><span class="line">...     digits = &#123;&#x27;0&#x27;: 0, &#x27;1&#x27;: 1, &#x27;2&#x27;: 2, &#x27;3&#x27;: 3, &#x27;4&#x27;: 4, &#x27;5&#x27;: 5, &#x27;6&#x27;: 6, &#x27;7&#x27;: 7, &#x27;8&#x27;: 8, &#x27;9&#x27;: 9&#125;</span><br><span class="line">...     return digits[s]</span><br><span class="line">&gt;&gt;&gt; reduce(fn, map(char2num, &#x27;13579&#x27;))</span><br><span class="line">13579</span><br></pre></td></tr></table></figure>
+<h3 id="filter">filter</h3>
+<p>Python内建的filter()函数用于过滤序列<br>
+filter接收一个函数和一个序列，filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。</p>
+<p>在一个list中，删掉偶数，只保留奇数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def is_odd(n):</span><br><span class="line">    return n % 2 == 1</span><br><span class="line"></span><br><span class="line">list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))</span><br><span class="line"># 结果: [1, 5, 9, 15]</span><br></pre></td></tr></table></figure>
+<p>filter()函数返回的是一个Iterator，即一个惰性序列，要强迫filter()完成计算结果，需要用list()函数获得所有结果并返回list</p>
+<h3 id="sorted">sorted</h3>
+<ul>
+<li>python内置的sorted()函数可以对list进行排序：<br>
+sorted()函数是一个高阶函数，可以接受一个key函数来实现自定义的排序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sorted([36,5,-12,9,-21],key=abs)</span><br><span class="line">[5,9,-12,-21,36]</span><br></pre></td></tr></table></figure>
+<p>对字符串排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted([&#x27;bob&#x27;,&#x27;about&#x27;,&#x27;zoo&#x27;,&#x27;credit&#x27;])</span><br></pre></td></tr></table></figure>
+<p>默认情况下，对字符串排序是按照ASCII的大小比较的</p>
+<p>若忽略大小写，按照字母排序，先用一个key函数把字符串映射为忽略大小写排序，实际就是先把字符串都变成大写或者小写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; sorted([&#x27;bob&#x27;, &#x27;about&#x27;, &#x27;Zoo&#x27;, &#x27;Credit&#x27;], key=str.lower)</span><br><span class="line">[&#x27;about&#x27;, &#x27;bob&#x27;, &#x27;Credit&#x27;, &#x27;Zoo&#x27;]</span><br></pre></td></tr></table></figure>
+<p>要进行反向排序，不必改动key函数，可以传入第三个参数<code>reverse=True</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; sorted([&#x27;bob&#x27;, &#x27;about&#x27;, &#x27;Zoo&#x27;, &#x27;Credit&#x27;], key=str.lower, reverse=True)</span><br><span class="line">[&#x27;Zoo&#x27;, &#x27;Credit&#x27;, &#x27;bob&#x27;, &#x27;about&#x27;]</span><br></pre></td></tr></table></figure>
+<h2 id="返回函数">返回函数</h2>
+<p>除了接受函数作为参数外，还可以把函数作为结果值返回。</p>
+<p>定义一个可变参数的求和函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def lazy_sum(*args):</span><br><span class="line">    def sum():</span><br><span class="line">        ax = 0</span><br><span class="line">        for n in args:</span><br><span class="line">            ax = ax + n</span><br><span class="line">        return ax</span><br><span class="line">    return sum</span><br></pre></td></tr></table></figure>
+<p>调用lazy_sum()时，返回的并不是求和结果，而是求和函数</p>
+<blockquote>
+<p>f = lazy_sum(1,3,5,7,9)<br>
+<code>&gt;&gt;&gt;</code>f</p>
+</blockquote>
+<p>调用函数<code>f</code>时，才真正计算求和的结果</p>
+<blockquote>
+<p>f()<br>
+25</p>
+</blockquote>
+<p>❗内部函数可以引用外部函数的参数和局部变量，当lazy_sum返回函数sum时，相关参数和变量都保存在返回的函数中，这种称为&quot;<strong>闭包</strong>&quot;</p>
+<p>调用lazy_sum()时，每次都会返回一个新的函数，即使传入相同的参数</p>
+<h3 id="闭包">闭包</h3>
+<p>当一个函数返回了一个函数后，其内部的局部变量还被新函数引用。<br>
+返回的函数没有立刻执行，而是直到调用了<code>f()</code>才执行</p>
+<p>❗返回闭包时牢记：返回函数不要引用任何循环变量，或者后续会发生变化的变量。</p>
+<h3 id="nonlocal">nonlocal</h3>
+<p>使用闭包时，内层函数仅引用外层函数的局部变量，返回的闭包函数调用一切正常，<br>
+当对外层变量赋值时，python解释器会将外层函数的局部变量当作内层函数的局部变量</p>
+<h2 id="匿名函数">匿名函数</h2>
+<p>在传入函数时，有些时候不需要显式地定义函数，直接传入匿名函数更方便</p>
+<p>以map()函数为例，计算<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">f(x)=x^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list(map(lambda x: x*x,[1,2,3,4,5,6,7,8,9]))</span><br><span class="line">[1,4,9,16,25,36,49,64,81]</span><br></pre></td></tr></table></figure>
+<p>匿名函数<code>lamda x: x*x</code>，实际上就是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def f(x):</span><br><span class="line">	return x * x</span><br></pre></td></tr></table></figure>
+<p>❗关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数。<br>
+匿名函数只能有一个表达式，不用写<code>return</code>，返回值就是该表达式的结果。</p>
+<p>匿名函数的好处，函数没有名字，不必担心函数名冲突。</p>
+<p>匿名函数也是函数对象，可以把匿名函数赋值给一个变量，再利用变量来调用该函数：<br>
+如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f = lambda x: x * x</span><br><span class="line">&gt;&gt;&gt; f</span><br><span class="line">&lt;function &lt;lambda&gt; at 0x101c6ef28&gt;</span><br><span class="line">&gt;&gt;&gt; f(5)</span><br><span class="line">25</span><br></pre></td></tr></table></figure>
+<p>匿名函数可以作为返回值返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def build(x,y)</span><br><span class="line">	return lambda: x * x + y * y</span><br></pre></td></tr></table></figure>
+<h2 id="装饰器">装饰器</h2>
+<p>函数对象有一个<code>__name__</code>属性，可以得到函数的名字</p>
+<blockquote>
+<p>now.<strong>name</strong><br>
+‘now’</p>
+</blockquote>
+<p>在代码运行期间动态增加功能的方式称之为“装饰器”(Decorator)<br>
+本质上，decorator就是一个返回函数的高阶函数。</p>
+<p>定义一个能打印日志的decorator</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def log(func):</span><br><span class="line">	def wrapper(*args,**kw):</span><br><span class="line">		print(&#x27;call %s():&#x27; % func.__name__)</span><br><span class="line">		return func(*args,**kw)</span><br><span class="line">	return wrapper</span><br></pre></td></tr></table></figure>
+<p>借助Python的@语法，把decorator置于函数的定义处：</p>
+<blockquote>
+<p>@log<br>
+def now():<br>
+print(‘2023-2-13’)</p>
+</blockquote>
+<p>调用now()函数不仅会运行now()函数本身，在运行now()函数前打印一行日志。<br>
+把@log放到<code>now()</code>的函数定义处，相当于执行了语句</p>
+<blockquote>
+<p>now = log(now)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@函数名</span><br><span class="line">def xxx</span><br><span class="line">	pass</span><br></pre></td></tr></table></figure>
+<p>相当于执行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx = 函数名(xxx)</span><br></pre></td></tr></table></figure>
+<p>自定义log的文本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">log</span>(<span class="params">text</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decorator</span>(<span class="params">func</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kw</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;%s %s():&#x27;</span> % (text, func.__name__))</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kw)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> decorator</span><br></pre></td></tr></table></figure>
+<p>3层嵌套的decorator用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@log(&#x27;execute&#x27;)</span><br><span class="line">def now():</span><br><span class="line">    print(&#x27;2015-3-25&#x27;)</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now()</span><br><span class="line">execute now():</span><br><span class="line">2015-3-25</span><br></pre></td></tr></table></figure>
+<p>和两层嵌套的decorator相比，3层嵌套的效果是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; now = log(&#x27;execute&#x27;)(now)</span><br></pre></td></tr></table></figure>
+<p>首先执行<code>log('execute')</code>，返回<code>decorator</code>函数，再调用返回的函数，参数是<code>now</code>，返回值最终是<code>wrapper</code>函数</p>
+<p>一个完整的decorator的写法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import functools</span><br><span class="line"></span><br><span class="line">def log(func):</span><br><span class="line">    @functools.wraps(func)</span><br><span class="line">    def wrapper(*args, **kw):</span><br><span class="line">        print(&#x27;call %s():&#x27; % func.__name__)</span><br><span class="line">        return func(*args, **kw)</span><br><span class="line">    return wrapper</span><br></pre></td></tr></table></figure>
+<p>或者针对带参数的decorator：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import functools</span><br><span class="line"></span><br><span class="line">def log(text):</span><br><span class="line">    def decorator(func):</span><br><span class="line">        @functools.wraps(func)</span><br><span class="line">        def wrapper(*args, **kw):</span><br><span class="line">            print(&#x27;%s %s():&#x27; % (text, func.__name__))</span><br><span class="line">            return func(*args, **kw)</span><br><span class="line">        return wrapper</span><br><span class="line">    return decorator</span><br></pre></td></tr></table></figure>
+<h2 id="偏函数">偏函数</h2>
+<ul>
+<li>
+<p>利用<code>functols.partial</code>创建一个偏函数</p>
+</li>
+<li>
+<p>作用：固定函数的某些参数化(设置默认值)，返回一个新的函数，使调用更简单</p>
+</li>
+</ul>
+<p>创建偏函数使，实际上可接受函数对象、<code>*args</code>和<code>**kw</code>三个参数</p>
+<p>使用偏函数可以使代码和操作更加简洁</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">路西</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">http://example.com/2023/02/13/4. 函数式编程/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">路西の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="/image/%E9%BA%A6%E7%94%B0%E4%B8%8E%E6%9F%8F%E6%A0%91.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/02/13/2.%20%E5%87%BD%E6%95%B0/" title="2. 函数"><img class="cover" src="/image/Vase%20with%20Irises.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2. 函数</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/13/1.%20Python%E5%9F%BA%E7%A1%80/" title="1. Python基础"><img class="cover" src="/image/California.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-13</div><div class="title">1. Python基础</div></div></a></div><div><a href="/2023/02/13/3.%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="3. 高级特性"><img class="cover" src="/image/The_siesta.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-13</div><div class="title">3. 高级特性</div></div></a></div><div><a href="/2023/02/13/2.%20%E5%87%BD%E6%95%B0/" title="2. 函数"><img class="cover" src="/image/Vase%20with%20Irises.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-13</div><div class="title">2. 函数</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Valine</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/image/puppy.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">路西</div><div class="author-info__description">Rise above. Focus on science.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-text">函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">高阶函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#map-reduce"><span class="toc-text">map&#x2F;reduce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce"><span class="toc-text">reduce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filter"><span class="toc-text">filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sorted"><span class="toc-text">sorted</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0"><span class="toc-text">返回函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nonlocal"><span class="toc-text">nonlocal</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-text">匿名函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%8F%E5%87%BD%E6%95%B0"><span class="toc-text">偏函数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/20/Conda%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85TVM/" title="Conda环境下安装TVM"><img src="/image/wave.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Conda环境下安装TVM"/></a><div class="content"><a class="title" href="/2024/03/20/Conda%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85TVM/" title="Conda环境下安装TVM">Conda环境下安装TVM</a><time datetime="2024-03-19T16:00:00.000Z" title="发表于 2024-03-20 00:00:00">2024-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/30/%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="激活函数"><img src="/image/monet.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="激活函数"/></a><div class="content"><a class="title" href="/2023/05/30/%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="激活函数">激活函数</a><time datetime="2023-05-29T16:00:00.000Z" title="发表于 2023-05-30 00:00:00">2023-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/25/Attention%E6%9C%BA%E5%88%B6/" title="Attention机制"><img src="/image/sea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Attention机制"/></a><div class="content"><a class="title" href="/2023/05/25/Attention%E6%9C%BA%E5%88%B6/" title="Attention机制">Attention机制</a><time datetime="2023-05-24T16:00:00.000Z" title="发表于 2023-05-25 00:00:00">2023-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/13/1.%20Python%E5%9F%BA%E7%A1%80/" title="1. Python基础"><img src="/image/California.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1. Python基础"/></a><div class="content"><a class="title" href="/2023/02/13/1.%20Python%E5%9F%BA%E7%A1%80/" title="1. Python基础">1. Python基础</a><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/13/3.%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="3. 高级特性"><img src="/image/The_siesta.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3. 高级特性"/></a><div class="content"><a class="title" href="/2023/02/13/3.%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="3. 高级特性">3. 高级特性</a><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/road.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 路西</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script><script>(() => {
+  const disqus_config = function () {
+    this.page.url = 'http://example.com/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/'
+    this.page.identifier = '/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/'
+    this.page.title = '4. 函数式编程'
+  }
+
+  const disqusReset = () => {
+    window.DISQUS && window.DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addGlobalFn('themeChange', disqusReset, 'disqus')
+
+  const loadDisqus = () =>{
+    if (window.DISQUS) disqusReset()
+    else {
+      const script = document.createElement('script')
+      script.src = 'https://.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', +new Date())
+      document.head.appendChild(script)
+    }
+  }
+
+  const getCount = async() => {
+    try {
+      const eleGroup = document.querySelector('#post-meta .disqus-comment-count')
+      if (!eleGroup) return
+      const cleanedLinks = eleGroup.href.replace(/#post-comment$/, '')
+
+      const res = await fetch(`https://disqus.com/api/3.0/threads/set.json?forum=&api_key=&thread:link=${cleanedLinks}`,{
+        method: 'GET'
+      })
+      const result = await res.json()
+
+      const count = result.response.length ? result.response[0].posts : 0
+      eleGroup.textContent = count
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if ('Valine' === 'Disqus' || !false) {
+    if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+    else {
+      loadDisqus()
+      
+    }
+  } else {
+    window.loadOtherComment = loadDisqus
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="105,105,105" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
