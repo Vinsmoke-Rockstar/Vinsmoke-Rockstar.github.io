@@ -53,7 +53,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-06-05 15:15:58'
+  postUpdate: '2024-06-05 15:18:30'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -223,7 +223,38 @@ isinstance()
 
 🐖注意：
 
- ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/13/3.%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="3. 高级特性"><img class="post-bg" src="/image/The_siesta.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3. 高级特性"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/3.%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="3. 高级特性">3. 高级特性</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">高级特性
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="4. 函数式编程"><img class="post-bg" src="/image/%E9%BA%A6%E7%94%B0%E4%B8%8E%E6%9F%8F%E6%A0%91.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="4. 函数式编程"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="4. 函数式编程">4. 函数式编程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">函数式编程
+函数式编程是一种抽象程度很高的编程范式
+高阶函数
+abs(-10)是函数调用，而abs是函数本身。
+函数本身也可以赋值给变量，即变量可以指向函数
+123&gt;&gt;&gt; f = abs&gt;&gt;&gt; f(-10)10
+函数名，指向函数的变量
+对于abs()，可以把函数名abs看作变量，它指向一个可以计算绝对值的函数
+高阶函数：一个函数接收另一个函数作为参数，这种函数就称之为高阶函数。
+定义一个最简单的高阶函数：
+12def add(x,y,f):	return f(x)+f(y)
+调用add(-5,6,abs)时，参数x,y和f分别接收-5,6和abs
+12345x = -5y = 6f = absf(x) + f(y) ==&gt; abs(-5) + abs(6) ==&gt; 11return 11
+map/reduce
+map函数接收两个参数，一个是函数，一个是Iterable,
+map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回
+123456&gt;&gt;&gt; def f(x):...     return x ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/13/5.%20%E6%A8%A1%E5%9D%97/" title="5. 模块"><img class="post-bg" src="/image/apple%20tree.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="5. 模块"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/5.%20%E6%A8%A1%E5%9D%97/" title="5. 模块">5. 模块</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">基本介绍
+Python中，一个.py文件就称之为一个模块(Module)
+使用模块的好处：
+
+提高代码的可维护性
+编写代码不必从零开始，一个模块编写完成，可被其他地方引用
+避免函数名和变量名冲突
+
+为了避免模块名冲突，Python引入按目录来终止模块的方法，称为包(Package)
+方法是选择一个顶层包名，比如mycompany，按照如下目录存放：
+1234mycompany├─ __init__.py├─ abc.py└─ xyz.py
+引入了包以后，只要顶层的包名不与别人冲突，那所有模块都不会与别人冲突。现在，abc.py模块的名字就变成了mycompany.abc，类似的，xyz.py的模块名变成了mycompany.xyz。
+⚠每个包目录下面都会有一个__init__.py的文件，这个文件必须存在，否则，Python会把这个目录当成普通目录，而不是一个包。
+__init__.py可以是空文件，也可以有Python代码
+可以有多级目录，组成多级层次的包结构。
+12345678mycompany ├─ web │  ├─ __init__.py │  ├─ utils.py │   ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/13/3.%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="3. 高级特性"><img class="post-bg" src="/image/The_siesta.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3. 高级特性"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/3.%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" title="3. 高级特性">3. 高级特性</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">高级特性
 切片(Slice)
 取一个list或tuple的部分元素
 1L = [&#x27;Michael&#x27;, &#x27;Sarah&#x27;, &#x27;Tracy&#x27;, &#x27;Bob&#x27;, &#x27;Jack&#x27;]
@@ -264,38 +295,7 @@ tuple也可用切片操作，结果仍为tuple
 迭代
 dict的存储不是按照list的方式顺序排序，对dict进行迭代，迭代出的结果顺序可能不一样
 默认情况下，dict迭代的是key，若要迭代value，可用for value in d.values()
-若要同时迭代ke ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="4. 函数式编程"><img class="post-bg" src="/image/%E9%BA%A6%E7%94%B0%E4%B8%8E%E6%9F%8F%E6%A0%91.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="4. 函数式编程"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/4.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" title="4. 函数式编程">4. 函数式编程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">函数式编程
-函数式编程是一种抽象程度很高的编程范式
-高阶函数
-abs(-10)是函数调用，而abs是函数本身。
-函数本身也可以赋值给变量，即变量可以指向函数
-123&gt;&gt;&gt; f = abs&gt;&gt;&gt; f(-10)10
-函数名，指向函数的变量
-对于abs()，可以把函数名abs看作变量，它指向一个可以计算绝对值的函数
-高阶函数：一个函数接收另一个函数作为参数，这种函数就称之为高阶函数。
-定义一个最简单的高阶函数：
-12def add(x,y,f):	return f(x)+f(y)
-调用add(-5,6,abs)时，参数x,y和f分别接收-5,6和abs
-12345x = -5y = 6f = absf(x) + f(y) ==&gt; abs(-5) + abs(6) ==&gt; 11return 11
-map/reduce
-map函数接收两个参数，一个是函数，一个是Iterable,
-map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回
-123456&gt;&gt;&gt; def f(x):...     return x ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/13/5.%20%E6%A8%A1%E5%9D%97/" title="5. 模块"><img class="post-bg" src="/image/apple%20tree.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="5. 模块"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/5.%20%E6%A8%A1%E5%9D%97/" title="5. 模块">5. 模块</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">基本介绍
-Python中，一个.py文件就称之为一个模块(Module)
-使用模块的好处：
-
-提高代码的可维护性
-编写代码不必从零开始，一个模块编写完成，可被其他地方引用
-避免函数名和变量名冲突
-
-为了避免模块名冲突，Python引入按目录来终止模块的方法，称为包(Package)
-方法是选择一个顶层包名，比如mycompany，按照如下目录存放：
-1234mycompany├─ __init__.py├─ abc.py└─ xyz.py
-引入了包以后，只要顶层的包名不与别人冲突，那所有模块都不会与别人冲突。现在，abc.py模块的名字就变成了mycompany.abc，类似的，xyz.py的模块名变成了mycompany.xyz。
-⚠每个包目录下面都会有一个__init__.py的文件，这个文件必须存在，否则，Python会把这个目录当成普通目录，而不是一个包。
-__init__.py可以是空文件，也可以有Python代码
-可以有多级目录，组成多级层次的包结构。
-12345678mycompany ├─ web │  ├─ __init__.py │  ├─ utils.py │   ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/13/6.%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="6. 面向对象编程"><img class="post-bg" src="/image/bull.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="6. 面向对象编程"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/6.%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="6. 面向对象编程">6. 面向对象编程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">基本概念
+若要同时迭代ke ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/13/6.%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="6. 面向对象编程"><img class="post-bg" src="/image/bull.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="6. 面向对象编程"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/13/6.%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="6. 面向对象编程">6. 面向对象编程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-12T16:00:00.000Z" title="发表于 2023-02-13 00:00:00">2023-02-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content">基本概念
 Object Oriented Programming简称OOP
 
 面向过程的程序设计把计算机程序视为一系列的命令集合，即一组函数的顺序执行。
@@ -338,7 +338,7 @@ PicGo是一个开源的图床工具，它可以让你快速地将你的图片上
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">学习记录</span><span class="card-category-list-count">14</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E8%B4%B4/"><span class="card-category-list-name">技术贴</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/"><span class="card-category-list-name">模型部署</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">深度学习</span><span class="card-category-list-count">2</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/deep-learning/" style="font-size: 1.3em; color: #99a1ac">deep learning</a> <a href="/tags/C/" style="font-size: 1.1em; color: #999">C</a> <a href="/tags/python/" style="font-size: 1.5em; color: #99a9bf">python</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 1.1em; color: #999">网站搭建</a> <a href="/tags/model-deploy/" style="font-size: 1.1em; color: #999">model deploy</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">六月 2022</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">18</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-01-04T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">41.6k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-06-05T07:15:58.487Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/Game-of-Thrones.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 路西</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 1.1em; color: #999">网站搭建</a> <a href="/tags/deep-learning/" style="font-size: 1.3em; color: #99a1ac">deep learning</a> <a href="/tags/C/" style="font-size: 1.1em; color: #999">C</a> <a href="/tags/model-deploy/" style="font-size: 1.1em; color: #999">model deploy</a> <a href="/tags/python/" style="font-size: 1.5em; color: #99a9bf">python</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">六月 2022</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">18</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-01-04T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">41.6k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-06-05T07:18:30.220Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/image/Game-of-Thrones.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 路西</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
   init: (str) => {
     window.typed = new Typed('#subtitle', Object.assign({
       strings: str,
